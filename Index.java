@@ -6,6 +6,8 @@ import java.util.Hashtable;
 
 public class Index {
 
+    //Method for Section 3
+    //Stores a dataset A file into an array then checks that array with every dataset B file and increases a counter. Repeats for all dataset A files.
     public void count(){
         long startTime = System.nanoTime();
         int count = 0;
@@ -47,7 +49,10 @@ public class Index {
         System.out.println("Time Taken: " + ((stopTime - startTime)/1000000) + " ms");
     }
 
+    //Method for Section 2
+    //Stores dataset A files into 50 buckets based off of modulo 50 value. 
     public void hashJoin(){
+        int count = 0;
         long startTime = System.nanoTime();
         Hashtable<Integer, String> hash = new Hashtable<>();
         for(int i = 1; i <= 99; i ++){
@@ -81,14 +86,17 @@ public class Index {
                     for(int j = 0; j < 100; j++){
                         int index = j*40;
                         String randomV = textB.substring(index+33, index+37);
-                        String columnB = textB.substring(index+12, index+31);
+                        String columnB = textB.substring(index, index+19);
                         int value = Integer.parseInt(randomV) % 50;
                         if(hash.containsKey(value)){
-                            int location = hash.get(value).indexOf(randomV);
-                            if(location != -1){
+                            String valueString = hash.get(value);
+                            int location = valueString.indexOf(randomV);
+                            while (location != -1) {
                                 int nearestFactor = (location / 40) * 40;
-                                String columnA = hash.get(value).substring(nearestFactor+12, nearestFactor+31);
+                                String columnA = valueString.substring(nearestFactor , nearestFactor + 19);
                                 System.out.println(columnA + ", " + columnB);
+                                count++;
+                                location = valueString.indexOf(randomV, location + 1); // Look for next occurrence
                             }
                         }
                     }
@@ -99,5 +107,6 @@ public class Index {
             }
             long stopTime = System.nanoTime();
             System.out.println("Time Taken: " + ((stopTime - startTime)/1000000) + " ms");
+            System.out.println("Number of rows: " + count);
     }
 }

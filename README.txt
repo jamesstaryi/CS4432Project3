@@ -12,4 +12,3 @@ Section I:
 Section II:
     From what I can tell everything works correctly.
     The time taken for the hash join factors in print time which I wasn't sure should be included or not.
-    Additionally, in the hash join I did not sort the records in the buckets.
