@@ -96,7 +96,7 @@ public class Index {
                                 String columnA = valueString.substring(nearestFactor , nearestFactor + 19);
                                 System.out.println(columnA + ", " + columnB);
                                 count++;
-                                location = valueString.indexOf(randomV, location + 1); // Look for next occurrence
+                                location = valueString.indexOf(randomV, location + 1);
                             }
                         }
                     }
